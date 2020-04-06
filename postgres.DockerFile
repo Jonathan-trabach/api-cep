@@ -1,0 +1,7 @@
+FROM postgres:12
+
+ENV POSTGRES_DB=pg-cep \
+    POSTGRES_USER=usertest \
+    POSTGRES_PASSWORD=123
+
+EXPOSE 3306

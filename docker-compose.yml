@@ -1,0 +1,28 @@
+version: '3.4'
+services:
+  pg-cep:
+    container_name: pg-cep
+    build:
+      context: .
+      dockerfile: postgres.DockerFile
+    ports:
+      - "33060:3306"
+    environment:
+        - POSTGRES_DB=dbcep
+        - POSTGRES_USER=usertest
+        - POSTGRES_PASSWORD=123
+        - PGPORT=3306
+
+
+  api-cep-java:
+    container_name: api-cep-java
+    build:
+      context: .
+      dockerfile: dev.DockerFile
+    depends_on:
+      - pg-cep
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_URL=pg-cep
+      - DB_PORT=3306
